@@ -18,6 +18,8 @@ public class Run {
             case "consumer":
                 Consumer.main(args);
                 break;
+            case "transfer":
+            	TransferTool.main(args);
             default:
                 throw new IllegalArgumentException("Don't know how to do " + args[0]);
         }

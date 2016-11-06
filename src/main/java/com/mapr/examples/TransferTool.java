@@ -3,6 +3,7 @@ package com.mapr.examples;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 public class TransferTool {
 
@@ -35,8 +36,13 @@ public class TransferTool {
 	}
 
 	public static void main(String[] args) {
-
-		TransferTool tool = new TransferTool("from_topic", "to_topic");
+		if(args == null || args.length < 3){
+			System.out.println("the args is not enough!!");
+		}
+        String fromTopic = args[1];
+        String toTopic = args[2];
+		TransferTool tool = new TransferTool(fromTopic, toTopic);
+		System.out.println("start trasfer");
 		tool.transfer();
 	}
 

@@ -84,9 +84,10 @@ public class Producer {
 
 	public static void main(String[] args) {
 		
-		Producer producer = new Producer();		
+		Producer producer = new Producer();
+		String topic = args[1];
 		try {
-			producer.process("from_topic");
+			producer.process(topic);
 
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();
