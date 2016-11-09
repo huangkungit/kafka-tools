@@ -65,9 +65,9 @@ public class TransferTool<K, V> {
 			System.out.println("the args is not enough!!");
 			System.exit(-1);
 		}
-		String fromTopic =  args[3];
-		String toTopic = args[4];
-		String type = args[2];
+		String fromTopic =  args[2];
+		String toTopic = args[3];
+		String type = args[1];
 		TransferTool<String, byte[]> tool = new TransferTool<String, byte[]>(fromTopic, toTopic, type);
 		System.out.println("start trasfer msg from " + fromTopic + " to " + toTopic);
 		tool.transfer();
