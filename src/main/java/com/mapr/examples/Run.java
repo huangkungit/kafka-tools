@@ -2,6 +2,11 @@ package com.mapr.examples;
 
 import java.io.IOException;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+
+import com.google.common.collect.Collections2;
+
 /**
  * Pick whether we want to run as producer or consumer. This lets us
  * have a single executable as a build target.

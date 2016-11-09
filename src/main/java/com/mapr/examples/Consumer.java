@@ -16,18 +16,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
 
-public class Consumer {
+public class Consumer<K,V> {
 
-	public KafkaConsumer<String, String> consumer;
+	public KafkaConsumer<K, V> consumer;
 	
 	private String topic;
 	
-	public Consumer(){
-		initial();
+	public Consumer(Map<String, Object> config){
+		initial(config);
 		
 	}
 
@@ -40,11 +41,12 @@ public class Consumer {
 		this.topic = topic;
 	}
 
-	private void initial() {
+	private void initial(Map<String, Object> config) {
 
 		try (InputStream props = Resources.getResource("consumer.props").openStream()) {
 			Properties properties = new Properties();
 			properties.load(props);
+			properties.putAll(config);
 			if (properties.getProperty("group.id") == null) {
 				properties.setProperty("group.id", "group-" + new Random().nextInt(100000));
 			}
@@ -55,12 +57,12 @@ public class Consumer {
 		}
 	}
 	
-	public List<String> consume(){
+	public List<V> consume(){
 		
-		List<String> msgs = Lists.newArrayList();
-		ConsumerRecords<String, String> records = consumer.poll(200);
+		List<V> msgs = Lists.newArrayList();
+		ConsumerRecords<K, V> records = consumer.poll(200);
 		if (records.count() != 0) {
-			for (ConsumerRecord<String, String> record : records){
+			for (ConsumerRecord<K, V> record : records){
 				msgs.add(record.value());
 			}
 		}
